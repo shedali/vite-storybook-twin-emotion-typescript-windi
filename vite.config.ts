@@ -9,6 +9,7 @@ const isExternal = (id: string) => !id.startsWith(".") && !path.isAbsolute(id);
 
 //library mode https://vitejs.dev/guide/build.html#library-mode
 //github.com/ben-rogerson/twin.examples/blob/master/vite-emotion-typescript/vite.config.ts
+//github.com/storybookjs/builder-vite/issues/210
 export default defineConfig(() => ({
   esbuild: {
     jsxFactory: "jsx",
@@ -33,6 +34,11 @@ export default defineConfig(() => ({
       },
     },
   },
+  server: {
+    watch: {
+      usePolling: true,
+    },
+  },
   plugins: [
     // dts(),
     react({
@@ -40,7 +46,7 @@ export default defineConfig(() => ({
       fastRefresh: true,
       jsxImportSource: "@emotion/react",
       jsxRuntime: "automatic",
-      babel: { plugins: ["formatjs"] },
+      babel: { plugins: ["@emotion/babel-plugin"] },
     }),
     WindiCSS(),
     macrosPlugin(),

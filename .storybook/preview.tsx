@@ -1,6 +1,5 @@
-// import "../dist/styles.css";
+import "../src/index.css";
 import React from "react";
-import "virtual:windi.css";
 import { useDarkMode } from "storybook-dark-mode";
 
 export const parameters = {

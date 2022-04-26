@@ -38,7 +38,7 @@ module.exports = {
         fastRefresh: true,
         jsxImportSource: "@emotion/react",
         jsxRuntime: "automatic",
-        babel: { plugins: ["formatjs"] },
+        babel: { plugins: ["@emotion/babel-plugin"], babelrc: false },
       }),
 
       macrosPlugin.default(),

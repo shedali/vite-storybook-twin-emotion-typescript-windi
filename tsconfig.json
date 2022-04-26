@@ -4,7 +4,12 @@
     "useDefineForClassFields": true,
     "lib": ["DOM", "ES2015"],
     "allowJs": false,
-    "types": ["vite/client", "vitest/globals", "@emotion/core"],
+    "types": [
+      "vite/client",
+      "vitest/globals",
+      "@emotion/core",
+      "@emotion/react/types/css-prop"
+    ],
     "skipLibCheck": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,

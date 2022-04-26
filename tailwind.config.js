@@ -6,7 +6,7 @@ module.exports = {
   extract: {
     include: ["./**/*.tsx"],
   },
-  content: ["./index.html", "./src/main.tsx", "./src/**/*.tsx"],
+  content: ["./index.html", "./src/main.tsx", "./src/**/*.tsx"], //https://tailwindcss.com/docs/upgrade-guide#configure-content-sources
   theme: {
     colors: {
       neutral: {
