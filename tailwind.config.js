@@ -1,4 +1,5 @@
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
+// const colors = require("@cmctechnology/cmc-invest-design-tokens").colors;
 
 module.exports = {
   darkMode: "class",
@@ -6,7 +7,12 @@ module.exports = {
   extract: {
     include: ["./**/*.tsx"],
   },
-  content: ["./index.html", "./src/main.tsx", "./src/**/*.tsx"], //https://tailwindcss.com/docs/upgrade-guide#configure-content-sources
+  content: [
+    "./node_modules/flowbite/**/*.js",
+    "./index.html",
+    "./src/main.tsx",
+    "./src/**/*.tsx",
+  ], //https://tailwindcss.com/docs/upgrade-guide#configure-content-sources
   theme: {
     colors: {
       neutral: {
@@ -144,8 +150,22 @@ module.exports = {
       screen: "100vh",
     },
   },
-
-  plugins: [require("daisyui")],
+  screens: {
+    sm: "640px",
+    // => @media (min-width: 640px) { ... }
+    md: "768px",
+    // => @media (min-width: 768px) { ... }
+    lg: "1024px",
+    // => @media (min-width: 1024px) { ... }
+    xl: "1280px",
+    // => @media (min-width: 1280px) { ... }
+    "2xl": "1536px",
+    // => @media (min-width: 1536px) { ... }
+  },
+  plugins: [
+    //require("daisyui"),
+    require("flowbite/plugin"),
+  ],
   daisyui: {
     //https://daisyui.com/docs/config/
     styled: false,

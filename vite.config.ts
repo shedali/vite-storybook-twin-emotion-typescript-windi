@@ -3,8 +3,8 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import macrosPlugin from "vite-plugin-babel-macros";
 import WindiCSS from "vite-plugin-windicss";
-import "./src/index.css";
-
+import dts from "vite-dts";
+import svgrPlugin from "vite-plugin-svgr";
 const isExternal = (id: string) => !id.startsWith(".") && !path.isAbsolute(id);
 
 //library mode https://vitejs.dev/guide/build.html#library-mode
@@ -18,7 +18,12 @@ export default defineConfig(() => ({
       import { jsx } from '@emotion/react';
     `,
   },
-  test: {},
+  test: {
+    environment: "happy-dom", // or 'jsdom', 'node',
+    coverage: {
+      reporter: ["text", "json", "html"],
+    },
+  },
   build: {
     emptyOutDir: false,
     lib: {
@@ -40,13 +45,34 @@ export default defineConfig(() => ({
     },
   },
   plugins: [
-    // dts(),
+    dts(),
+    svgrPlugin({
+      svgrOptions: {
+        icon: true,
+      },
+    }),
     react({
       exclude: [/\.stories\.(t|j)sx?$/, /node_modules/],
       fastRefresh: true,
       jsxImportSource: "@emotion/react",
-      jsxRuntime: "automatic",
-      babel: { plugins: ["@emotion/babel-plugin"] },
+      babel: {
+        plugins: [
+          "babel-plugin-macros", //breaks vitest
+          [
+            "@emotion/babel-plugin-jsx-pragmatic",
+            {
+              export: "jsx",
+              import: "__cssprop",
+              module: "@emotion/react",
+            },
+          ],
+          [
+            "@babel/plugin-transform-react-jsx",
+            { pragma: "__cssprop" },
+            "twin.macro",
+          ],
+        ],
+      },
     }),
     WindiCSS(),
     macrosPlugin(),

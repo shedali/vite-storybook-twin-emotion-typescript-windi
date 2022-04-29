@@ -1,14 +1,17 @@
 {
-  "name": "test",
-  "version": "0.0.1",
-  "private": true,
-  "main": "src/index.js",
+  "name": "@cmctechnology/invest-ui-component-library",
+  "version": "0.0.18",
+  "private": false,
+  "repository": {
+    "url": "https://github.com/cmctechnology/sinatra-ui-component-library"
+  },
+  "main": "dist/invest-ui-component-library.es.js",
+  "typings": "dist/index.d.ts",
   "files": [
-    "types",
     "dist"
   ],
   "scripts": {
-    "dev": "run-p devserver storybook test --race",
+    "dev": "run-p devserver storybook test:dev --race",
     "devserver": "vite",
     "build:tailwind": "npx tailwindcss -o dist/styles.css --minify",
     "build:typescript": "tsc",
@@ -16,20 +19,29 @@
     "build": "run-s build:*",
     "clear": "npx rimraf dist",
     "preview": "vite preview",
-    "test": "vitest",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "lint": "echo run lint",
     "test:watch": "vitest watch",
     "test:dev": "vitest dev",
     "test:changed": "vitest related",
     "coverage": "vitest run --coverage",
     "storybook": "start-storybook -p 6006",
+    "scaffold": "npx hygen component new",
     "build:storybook": "build-storybook",
     "vitebook:dev": "vitebook dev",
     "vitebook:build": "vitebook build",
-    "vitebook:preview": "vitebook preview"
+    "vitebook:preview": "vitebook preview",
+    "chromatic": "npx chromatic --project-token=7ddc7dcee6f9 --exit-zero-on-changes",
+    "prepublish": "run-s build:vite build:typescript build:tailwind"
+  },
+  "lint-staged": {
+    "*.test.tsx": [
+      "vitest run"
+    ]
   },
   "dependencies": {
-    "preact": "^10.5.14",
-    "preact-render-to-string": "^5.1.19",
+    "@emotion/react": "^11.9.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
@@ -39,12 +51,12 @@
     "@emotion/babel-plugin": "^11.9.2",
     "@emotion/babel-plugin-jsx-pragmatic": "^0.1.5",
     "@emotion/babel-preset-css-prop": "^11.2.0",
-    "@emotion/react": "^11.9.0",
     "@headlessui/react": "^1.6.0",
     "@heroicons/react": "^1.0.6",
     "@mdx-js/preact": "^2.1.1",
     "@mdx-js/react": "2.1.1",
     "@preact/preset-vite": "^2.1.7",
+    "@reach/checkbox": "^0.17.0",
     "@storybook/addon-actions": "^6.4.22",
     "@storybook/addon-docs": "^6.4.22",
     "@storybook/addon-essentials": "^6.4.22",
@@ -69,18 +81,20 @@
     "babel-loader": "^8.2.4",
     "babel-plugin-formatjs": "^10.3.19",
     "babel-plugin-twin": "^1.0.2",
+    "chromatic": "^6.5.4",
     "client-logger": "link:@@storybook/client-logger",
     "cssnano": "^5.1.7",
     "daisyui": "^2.14.2",
     "esbuild": "^0.14.38",
     "esbuild-plugin-jsximportsource": "^0.0.4",
     "esbuild-wasm": "^0.14.38",
+    "flowbite": "^1.4.3",
     "happy-dom": "^2.55.0",
+    "husky": "^7.0.0",
     "jest": "*",
     "lint-staged": ">=10",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.12",
-    "postcss-import": "^14.1.0",
     "react-test-renderer": "17",
     "storybook-dark-mode": "^1.0.9",
     "tailwindcss": "^3.0.24",
@@ -91,9 +105,13 @@
     "vite-dts": "^1.0.4",
     "vite-plugin-babel": "^1.0.0",
     "vite-plugin-babel-macros": "^1.0.6",
+    "vite-plugin-svgr": "^1.1.0",
     "vite-plugin-windicss": "^1.8.4",
-    "vitest": "^0.9.3",
-    "windicss": "^3.5.1"
+    "vitest": "^0.9.3"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
   },
   "babelMacros": {
     "twin": {

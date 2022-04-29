@@ -23,9 +23,9 @@ export enum ButtonType {
 const getButtonStyles = (variant: ButtonType | string) => [
   tw``,
   variant === ButtonType.primary &&
-    tw`text-light bg-primary dark:text-dark dark:bg-light`,
+    tw`text-light bg-primary-40 dark:text-dark dark:bg-light`,
   variant === ButtonType.secondary &&
-    tw`text-light bg-secondary dark:bg-secondary dark:text-light`,
+    tw`text-light bg-secondary-40 dark:bg-secondary-40 dark:text-light`,
 ];
 
 type ButtonProps = {

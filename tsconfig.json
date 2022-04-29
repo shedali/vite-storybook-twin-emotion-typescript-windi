@@ -8,7 +8,8 @@
       "vite/client",
       "vitest/globals",
       "@emotion/core",
-      "@emotion/react/types/css-prop"
+      "@emotion/react/types/css-prop",
+      "vite-plugin-svgr/client"
     ],
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -20,7 +21,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "emitDeclarationOnly": true,
-    "declarationDir": "./dist/types",
+    "declarationDir": "./dist",
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
     "declaration": true
